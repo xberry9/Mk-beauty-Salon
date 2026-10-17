@@ -263,6 +263,32 @@
       display: block;
       margin-bottom: 8px;
     }
+    /* Form Close Button - top right, opposite the menu */
+    .form-close-btn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 12px;
+      color: #fff;
+      font-size: 24px;
+      font-weight: bold;
+      line-height: 1;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .form-close-btn:hover {
+      background: rgba(255, 105, 180, 0.4);
+      border-color: rgba(255, 105, 180, 0.5);
+      transform: scale(1.1);
+    }
   </style>
 </head>
 <body>
@@ -270,13 +296,13 @@
 <header>
   <h1>MK Beauty Salon</h1>
   <h2>Customer Reviews</h2>
-  <div style="display:flex; gap:10px; align-items:center; margin-left:auto;">
-    <a href="index.html" class="close-btn">&times;</a>
+  <div style="display:flex; justify-content:space-between; align-items:center;">
     <div class="hamburger" onclick="toggleMenu()">
       <span></span>
       <span></span>
       <span></span>
     </div>
+    <a href="index.html" class="close-btn">&times;</a>
   </div>
 </header>
 
@@ -307,7 +333,7 @@ function toggleMenu() {
 <!-- Rating Graph -->
 <div style="background:rgba(255, 255, 255, 0.1); backdrop-filter: blur(15px); padding:30px; border-radius:15px; margin-bottom:30px; text-align:left; border: 1px solid rgba(255, 255, 255, 0.2);">
 
-<div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:25px;">
+<div id="ratingSummary" style="display:flex; align-items:center; justify-content:space-between; margin-bottom:25px;">
 <div style="text-align:center;">
 <div style="font-size:56px; font-weight:bold; color:#fff; line-height:1;">4.9</div>
 <div style="color:#ffd700; font-size:24px; margin-top:5px;">★★★★★</div>
@@ -414,14 +440,16 @@ function toggleMenu() {
 </div>
 
 <!-- Leave Review Button -->
-<button id="reviewBtn" onclick="document.getElementById('reviewFormSection').style.display='block'; document.getElementById('reviewBtn').style.display='none';" class="glass-button glass-button-primary" style="margin:30px auto; display:block;">
+<button id="reviewBtn" onclick="openReviewForm()" class="glass-button glass-button-primary" style="margin:30px auto; display:block;">
     Leave a Review
 </button>
 
 <!-- Review Submission Form -->
-<div id="reviewFormSection" style="display:none;">
+<div id="reviewFormSection" style="display:none; position:relative;">
 
-<h4 style="color:#fff; font-size: 20px; margin-bottom: 20px; text-align:center;">Leave a Review</h4>
+<button type="button" class="form-close-btn" style="top:-5px; right:0;" onclick="closeReviewForm()" title="Close form" aria-label="Close review form">&times;</button>
+
+<h4 style="color:#fff; font-size: 20px; margin-bottom: 20px; text-align:center; padding:8px 50px 0;">Leave a Review</h4>
 
 <form id="reviewForm" style="background:rgba(255, 255, 255, 0.1); backdrop-filter: blur(15px); padding:25px; border-radius:15px; border: 1px solid rgba(255, 255, 255, 0.2);">
 
@@ -448,6 +476,21 @@ function toggleMenu() {
 </form>
 
 <script>
+function openReviewForm() {
+  document.getElementById('reviewFormSection').style.display = 'block';
+  document.getElementById('reviewBtn').style.display = 'none';
+  document.getElementById('ratingSummary').style.display = 'none';
+  document.getElementById('reviewsContent').style.display = 'none';
+  document.getElementById('reviewFormSection').scrollIntoView({ behavior: 'smooth' });
+}
+
+function closeReviewForm() {
+  document.getElementById('reviewFormSection').style.display = 'none';
+  document.getElementById('reviewBtn').style.display = 'block';
+  document.getElementById('ratingSummary').style.display = 'flex';
+  document.getElementById('reviewsContent').style.display = 'block';
+}
+
 document.getElementById('reviewForm').addEventListener('submit', function(e){
   e.preventDefault();
   

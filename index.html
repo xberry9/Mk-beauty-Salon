@@ -268,6 +268,33 @@
             border: 1px solid rgba(255, 107, 107, 0.4);
             text-align: center;
         }
+
+        /* Form Close Button - top right, opposite the menu */
+        .form-close-btn {
+          position: absolute;
+          top: 15px;
+          right: 15px;
+          width: 40px;
+          height: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: rgba(255, 255, 255, 0.2);
+          border: 1px solid rgba(255, 255, 255, 0.3);
+          border-radius: 12px;
+          color: #fff;
+          font-size: 24px;
+          font-weight: bold;
+          line-height: 1;
+          cursor: pointer;
+          transition: all 0.3s;
+        }
+
+        .form-close-btn:hover {
+          background: rgba(255, 105, 180, 0.4);
+          border-color: rgba(255, 105, 180, 0.5);
+          transform: scale(1.1);
+        }
     </style>
 </head>
 <body>
@@ -314,7 +341,7 @@ We are available for bookings Monday to Friday, 9:00 AM to 6:00 PM, and Saturday
 We can't wait to glam you up!
 </p>
 
-<button id="bookBtn" onclick="document.getElementById('bookingSection').style.display='block'; document.getElementById('bookBtn').style.display='none';" class="glass-button glass-button-primary">
+<button id="bookBtn" onclick="openBookingForm()" class="glass-button glass-button-primary">
     Book Now
 </button>
 
@@ -323,7 +350,9 @@ We can't wait to glam you up!
 <!-- Booking Section -->
 <div id="bookingSection" style="display:none; max-width:600px; margin: 20px auto;">
 
-<div class="glass-card fade-in">
+<div class="glass-card fade-in" style="position:relative;">
+
+<button type="button" class="form-close-btn" onclick="closeBookingForm()" title="Close form" aria-label="Close booking form">&times;</button>
 
 <h3 style="color:#fff; text-align:center; margin-top:0; font-size: 26px; margin-bottom: 25px;">Booking Form</h3>
 
@@ -369,7 +398,7 @@ We can't wait to glam you up!
 </div>
 
 <!-- Reviews Section - Outside Card -->
-<div style="max-width:600px; margin: 40px auto; text-align:center;">
+<div id="homeReviews" style="max-width:600px; margin: 40px auto; text-align:center;">
 
 <h3 style="color:#fff; font-size: 28px; margin-bottom: 10px;">Customer Reviews</h3>
 <p style="text-align:center; color:rgba(255,255,255,0.8); margin-bottom:30px; font-size:15px;">See what our clients say about us</p>
@@ -388,6 +417,19 @@ We can't wait to glam you up!
 </div>
 
 <script>
+function openBookingForm() {
+  document.getElementById('bookingSection').style.display = 'block';
+  document.getElementById('bookBtn').style.display = 'none';
+  document.getElementById('homeReviews').style.display = 'none';
+  document.getElementById('bookingSection').scrollIntoView({ behavior: 'smooth' });
+}
+
+function closeBookingForm() {
+  document.getElementById('bookingSection').style.display = 'none';
+  document.getElementById('bookBtn').style.display = 'inline-block';
+  document.getElementById('homeReviews').style.display = 'block';
+}
+
 document.getElementById('bookingForm').addEventListener('submit', function(e){
   e.preventDefault();
   
