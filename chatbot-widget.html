@@ -1,0 +1,39 @@
+<!-- Chatbot Widget - Add this to the bottom of each page before </body> -->
+<link rel="stylesheet" href="chatbot-styles.css">
+
+<div class="chat-widget-container">
+    <button class="chat-toggle-button" id="chatToggle" title="Chat with Xberry">💬</button>
+    
+    <div class="chat-container" id="chatContainer">
+        <div class="chat-header">
+            <h1>Xberry 💅</h1>
+            <p>Your MK Beauty Salon Assistant</p>
+        </div>
+        
+        <div class="chat-messages" id="chatMessages">
+            <div class="message bot-message">
+                <p>Hi! I'm Xberry, your MK Beauty Salon assistant. Ask me about our services, prices, or opening hours!</p>
+            </div>
+        </div>
+        
+        <div class="chat-input-container">
+            <input 
+                type="text" 
+                id="userInput" 
+                placeholder="Ask me anything..." 
+                class="chat-input"
+            >
+            <button id="sendButton" class="send-button">Send</button>
+        </div>
+    </div>
+</div>
+
+<script src="chatbot-script.js"></script>
+
+<script>
+// Toggle chat widget
+document.getElementById('chatToggle').addEventListener('click', function() {
+    const chatContainer = document.getElementById('chatContainer');
+    chatContainer.style.display = chatContainer.style.display === 'none' ? 'flex' : 'none';
+});
+</script>

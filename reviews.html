@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reviews - MK Beauty Salon</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: url('background.jpg') center center fixed no-repeat;
+      background-size: cover;
+      min-height: 100vh;
+      padding: 20px;
+      position: relative;
+    }
+    
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: -1;
+    }
+    
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    
+    h1 {
+      color: #fff;
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+    }
+    
+    h2 {
+      color: #fff;
+      font-size: 1.8em;
+      margin-top: 5px;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.5);
+    }
+    
+    /* Glassy Navigation */
+    nav {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(15px);
+      padding: 15px 30px;
+      border-radius: 50px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+      display: inline-block;
+      margin-top: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      padding: 10px 20px;
+      font-weight: 600;
+      transition: all 0.3s;
+      border-radius: 25px;
+    }
+    
+    nav a:hover {
+      background: rgba(214, 83, 160, 0.3);
+      color: #fff;
+    }
+    
+    nav a.active {
+      background: linear-gradient(135deg, #ff69b4, #da70d6);
+      color: white;
+    }
+    
+    /* Glassy Button */
+    .glass-button {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      color: white;
+      padding: 16px 40px;
+      border-radius: 30px;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+    
+    .glass-button:hover {
+      background: rgba(255, 255, 255, 0.3);
+      border-color: rgba(255, 255, 255, 0.6);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+    }
+    
+    .glass-button-primary {
+      background: linear-gradient(135deg, rgba(255, 105, 180, 0.6), rgba(218, 112, 214, 0.6));
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+    }
+    
+    .glass-button-primary:hover {
+      background: linear-gradient(135deg, #ff69b4, #da70d6);
+    }
+    
+    /* Glass Card */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      padding: 40px;
+    }
+    
+    /* Hamburger Menu - Always Visible */
+    .hamburger {
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(15px);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s;
+    }
+    
+    .hamburger:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+    
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: #fff;
+      margin: 4px 0;
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+    
+    /* X Close Button - Always Visible */
+    .close-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 45px;
+      height: 45px;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(15px);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 24px;
+      color: #fff;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    
+    .close-btn:hover {
+      background: rgba(255, 105, 180, 0.4);
+      border-color: rgba(255, 105, 180, 0.5);
+      transform: scale(1.1);
+    }
+    
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(20px);
+      z-index: 1000;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    
+    .mobile-menu a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 24px;
+      margin: 20px 0;
+      padding: 15px 40px;
+      border-radius: 15px;
+      transition: 0.3s;
+    }
+    
+    .mobile-menu a:hover {
+      background: rgba(255, 105, 180, 0.3);
+    }
+    
+    .mobile-menu a.active {
+      background: linear-gradient(135deg, #ff69b4, #da70d6);
+    }
+    
+    .close-menu {
+      position: absolute;
+      top: 30px;
+      right: 30px;
+      font-size: 40px;
+      color: #fff;
+      cursor: pointer;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .fade-in {
+      animation: fadeIn 0.8s ease-out;
+    }
+    
+    /* Form Styles */
+    input, select, textarea {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #fff;
+      padding: 14px;
+      border-radius: 12px;
+      font-size: 15px;
+      width: 100%;
+      box-sizing: border-box;
+      transition: all 0.3s;
+    }
+    
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #ff69b4;
+      background: rgba(255, 255, 255, 0.25);
+    }
+    
+    input::placeholder, textarea::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
+    
+    select option {
+      background: #333;
+      color: #fff;
+    }
+    
+    label {
+      color: #fff;
+      font-weight: 600;
+      font-size: 14px;
+      display: block;
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>MK Beauty Salon</h1>
+  <h2>Customer Reviews</h2>
+  <div style="display:flex; gap:10px; align-items:center; margin-left:auto;">
+    <a href="index.html" class="close-btn">&times;</a>
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <span class="close-menu" onclick="window.location.href='index.html'">&times;</span>
+  <a href="index.html">Home</a>
+  <a href="services.html">Services</a>
+  <a href="Contact Us.html">Contact</a>
+  <a href="About.html">About</a>
+  <a href="reviews.html" class="active">Reviews</a>
+  <a href="#" onclick="toggleMenu(); document.getElementById('chatToggle').click();">Get Help</a>
+</div>
+
+<script>
+function toggleMenu() {
+  const menu = document.getElementById('mobileMenu');
+  menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+}
+</script>
+
+<!-- Reviews Section -->
+<div class="glass-card fade-in" style="max-width:600px; margin:20px auto; text-align:center;">
+
+<h3 style="color:#fff; font-size: 28px; margin-bottom: 10px;">Customer Reviews</h3>
+<p style="text-align:center; color:rgba(255,255,255,0.8); margin-bottom:30px; font-size:15px;">See what our clients say about us</p>
+
+<!-- Rating Graph -->
+<div style="background:rgba(255, 255, 255, 0.1); backdrop-filter: blur(15px); padding:30px; border-radius:15px; margin-bottom:30px; text-align:left; border: 1px solid rgba(255, 255, 255, 0.2);">
+
+<div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:25px;">
+<div style="text-align:center;">
+<div style="font-size:56px; font-weight:bold; color:#fff; line-height:1;">4.9</div>
+<div style="color:#ffd700; font-size:24px; margin-top:5px;">★★★★★</div>
+<div style="color:rgba(255,255,255,0.8); font-size:13px; margin-top:5px;">127 reviews</div>
+</div>
+<div style="flex:1; margin-left:30px;">
+
+<!-- 5 Stars -->
+<div style="display:flex; align-items:center; margin-bottom:8px;">
+<span style="width:50px; font-size:13px; color:rgba(255,255,255,0.8);">5 ★</span>
+<div style="flex:1; height:10px; background:rgba(255,255,255,0.2); border-radius:5px; margin:0 10px; overflow:hidden;">
+<div style="width:85%; height:100%; background:#ffd700; border-radius:5px;"></div>
+</div>
+<span style="width:40px; font-size:13px; color:rgba(255,255,255,0.8);">85%</span>
+</div>
+
+<!-- 4 Stars -->
+<div style="display:flex; align-items:center; margin-bottom:8px;">
+<span style="width:50px; font-size:13px; color:rgba(255,255,255,0.8);">4 ★</span>
+<div style="flex:1; height:10px; background:rgba(255,255,255,0.2); border-radius:5px; margin:0 10px; overflow:hidden;">
+<div style="width:10%; height:100%; background:#ffd700; border-radius:5px;"></div>
+</div>
+<span style="width:40px; font-size:13px; color:rgba(255,255,255,0.8);">10%</span>
+</div>
+
+<!-- 3 Stars -->
+<div style="display:flex; align-items:center; margin-bottom:8px;">
+<span style="width:50px; font-size:13px; color:rgba(255,255,255,0.8);">3 ★</span>
+<div style="flex:1; height:10px; background:rgba(255,255,255,0.2); border-radius:5px; margin:0 10px; overflow:hidden;">
+<div style="width:3%; height:100%; background:#ffd700; border-radius:5px;"></div>
+</div>
+<span style="width:40px; font-size:13px; color:rgba(255,255,255,0.8);">3%</span>
+</div>
+
+<!-- 2 Stars -->
+<div style="display:flex; align-items:center; margin-bottom:8px;">
+<span style="width:50px; font-size:13px; color:rgba(255,255,255,0.8);">2 ★</span>
+<div style="flex:1; height:10px; background:rgba(255,255,255,0.2); border-radius:5px; margin:0 10px; overflow:hidden;">
+<div style="width:1%; height:100%; background:#ffd700; border-radius:5px;"></div>
+</div>
+<span style="width:40px; font-size:13px; color:rgba(255,255,255,0.8);">1%</span>
+</div>
+
+<!-- 1 Star -->
+<div style="display:flex; align-items:center; margin-bottom:8px;">
+<span style="width:50px; font-size:13px; color:rgba(255,255,255,0.8);">1 ★</span>
+<div style="flex:1; height:10px; background:rgba(255,255,255,0.2); border-radius:5px; margin:0 10px; overflow:hidden;">
+<div style="width:1%; height:100%; background:#ffd700; border-radius:5px;"></div>
+</div>
+<span style="width:40px; font-size:13px; color:rgba(255,255,255,0.8);">1%</span>
+</div>
+
+</div>
+</div>
+
+<!-- All Reviews -->
+<div id="reviewsContent" style="text-align:left; margin-bottom:30px;">
+
+<div style="background:rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); padding:20px; border-radius:15px; margin-bottom:15px; border-left:4px solid #ff69b4;">
+<div style="display:flex; align-items:center; margin-bottom:10px;">
+<span style="color:#ffd700; font-size:18px;">★★★★★</span>
+<span style="font-weight:bold; color:#fff; margin-left:10px;">Thandi M.</span>
+<span style="color:rgba(255,255,255,0.6); font-size:12px; margin-left:auto;">2 weeks ago</span>
+</div>
+<p style="color:rgba(255,255,255,0.8); font-size:14px; line-height:1.6; margin:0;">"Amazing service! My nails have never looked better. Mikhenso is so talented and professional. Will definitely be back!"</p>
+</div>
+
+<div style="background:rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); padding:20px; border-radius:15px; margin-bottom:15px; border-left:4px solid #ff69b4;">
+<div style="display:flex; align-items:center; margin-bottom:10px;">
+<span style="color:#ffd700; font-size:18px;">★★★★★</span>
+<span style="font-weight:bold; color:#fff; margin-left:10px;">Lerato K.</span>
+<span style="color:rgba(255,255,255,0.6); font-size:12px; margin-left:auto;">1 month ago</span>
+</div>
+<p style="color:rgba(255,255,255,0.8); font-size:14px; line-height:1.6; margin:0;">"The eyelash extensions are perfect! Natural looking and they last so long. Best salon in Vereeniging!"</p>
+</div>
+
+<div style="background:rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); padding:20px; border-radius:15px; margin-bottom:15px; border-left:4px solid #ff69b4;">
+<div style="display:flex; align-items:center; margin-bottom:10px;">
+<span style="color:#ffd700; font-size:18px;">★★★★★</span>
+<span style="font-weight:bold; color:#fff; margin-left:10px;">Nomzamo D.</span>
+<span style="color:rgba(255,255,255,0.6); font-size:12px; margin-left:auto;">3 weeks ago</span>
+</div>
+<p style="color:rgba(255,255,255,0.8); font-size:14px; line-height:1.6; margin:0;">"Got my makeup done for a wedding and I received so many compliments! The full glam look was exactly what I wanted. Thank you MK!"</p>
+</div>
+
+<div style="background:rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); padding:20px; border-radius:15px; margin-bottom:15px; border-left:4px solid #ff69b4;">
+<div style="display:flex; align-items:center; margin-bottom:10px;">
+<span style="color:#ffd700; font-size:18px;">★★★★☆</span>
+<span style="font-weight:bold; color:#fff; margin-left:10px;">Busi N.</span>
+<span style="color:rgba(255,255,255,0.6); font-size:12px; margin-left:auto;">1 month ago</span>
+</div>
+<p style="color:rgba(255,255,255,0.8); font-size:14px; line-height:1.6; margin:0;">"Great hair installation service. The salon is beautiful and clean. Only wish they were open on Sundays!"</p>
+</div>
+
+<div style="background:rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); padding:20px; border-radius:15px; margin-bottom:15px; border-left:4px solid #ff69b4;">
+<div style="display:flex; align-items:center; margin-bottom:10px;">
+<span style="color:#ffd700; font-size:18px;">★★★★★</span>
+<span style="font-weight:bold; color:#fff; margin-left:10px;">Zama P.</span>
+<span style="color:rgba(255,255,255,0.6); font-size:12px; margin-left:auto;">2 months ago</span>
+</div>
+<p style="color:rgba(255,255,255,0.8); font-size:14px; line-height:1.6; margin:0;">"Been coming here for 6 months now and I'm never disappointed. The gel nails last 3 weeks easily. Highly recommend!"</p>
+</div>
+
+</div>
+
+<!-- Leave Review Button -->
+<button id="reviewBtn" onclick="document.getElementById('reviewFormSection').style.display='block'; document.getElementById('reviewBtn').style.display='none';" class="glass-button glass-button-primary" style="margin:30px auto; display:block;">
+    Leave a Review
+</button>
+
+<!-- Review Submission Form -->
+<div id="reviewFormSection" style="display:none;">
+
+<h4 style="color:#fff; font-size: 20px; margin-bottom: 20px; text-align:center;">Leave a Review</h4>
+
+<form id="reviewForm" style="background:rgba(255, 255, 255, 0.1); backdrop-filter: blur(15px); padding:25px; border-radius:15px; border: 1px solid rgba(255, 255, 255, 0.2);">
+
+<label>Your Name:</label>
+<input type="text" id="reviewName" required placeholder="Your name">
+
+<label>Rating:</label>
+<select id="reviewRating" required>
+  <option value="">-- Select Rating --</option>
+  <option value="5">5 Stars - Excellent</option>
+  <option value="4">4 Stars - Very Good</option>
+  <option value="3">3 Stars - Good</option>
+  <option value="2">2 Stars - Fair</option>
+  <option value="1">1 Star - Poor</option>
+</select>
+
+<label>Your Review:</label>
+<textarea id="reviewText" required placeholder="Share your experience..." rows="4"></textarea>
+
+<button type="submit" class="glass-button glass-button-primary" style="width:100%; margin-top:20px;">
+  Submit Review
+</button>
+
+</form>
+
+<script>
+document.getElementById('reviewForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  
+  var name = document.getElementById('reviewName').value;
+  var rating = document.getElementById('reviewRating').value;
+  var text = document.getElementById('reviewText').value;
+  
+  var stars = '';
+  for(var i = 0; i < rating; i++) {
+    stars += '';
+  }
+  
+  var reviewHTML = `
+    <div style="background:rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); padding:20px; border-radius:15px; margin-bottom:15px; border-left:4px solid #ff69b4; animation: fadeIn 0.5s;">
+      <div style="display:flex; align-items:center; margin-bottom:10px;">
+        <span style="color:#ffd700; font-size:18px;">${stars}</span>
+        <span style="font-weight:bold; color:#fff; margin-left:10px;">${name}</span>
+        <span style="color:rgba(255,255,255,0.6); font-size:12px; margin-left:auto;">Just now</span>
+      </div>
+      <p style="color:rgba(255,255,255,0.8); font-size:14px; line-height:1.6; margin:0;">"${text}"</p>
+    </div>
+  `;
+  
+  document.getElementById('reviewsContent').insertAdjacentHTML('afterbegin', reviewHTML);
+  
+  alert('Thank you ' + name + ' for your review!');
+  
+  document.getElementById('reviewForm').reset();
+});
+</script>
+
+</div>
+
+<style>
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>
+
+<!-- External Review Buttons -->
+<div style="display:flex; gap:15px; flex-wrap:wrap; justify-content:center; margin-top:20px;">
+
+<a href="https://www.google.com/maps/search/?api=1&query=MK+Beauty+Salon+Vereeniging" target="_blank" class="glass-button" style="flex:1; min-width:200px; text-decoration:none;">
+  Write on Google
+</a>
+
+<a href="https://www.facebook.com" target="_blank" class="glass-button" style="flex:1; min-width:200px; text-decoration:none;">
+  Review on Facebook
+</a>
+
+</div>
+
+<!-- Back to Home Button -->
+<a href="index.html" class="glass-button glass-button-primary" style="display:inline-block; margin-top:30px; text-decoration:none;">
+  Back to Home
+</a>
+
+</div>
+
+<!-- Chatbot Widget -->
+<div id="chatbotWidget"></div>
+<script>
+  document.getElementById('chatbotWidget').innerHTML = `
+    <link rel="stylesheet" href="chatbot-styles.css">
+    <div class="chat-widget-container">
+      <button class="chat-toggle-button" id="chatToggle" title="Chat with Xberry">💬</button>
+      <span class="get-help-text" onclick="document.getElementById('chatToggle').click()">Get Help</span>
+      <div class="chat-container" id="chatContainer">
+        <div class="chat-header">
+          <h1>Xberry</h1>
+          <p>Your MK Beauty Salon Assistant</p>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+          <div class="message bot-message">
+            <p>Hi! I'm Xberry, your MK Beauty Salon assistant. Ask me about our services, prices, or opening hours!</p>
+          </div>
+        </div>
+        <div class="chat-input-container">
+          <input type="text" id="userInput" placeholder="Ask me anything..." class="chat-input">
+          <button id="sendButton" class="send-button">Send</button>
+        </div>
+      </div>
+    </div>
+  `;
+</script>
+<script src="chatbot-script.js"></script>
+<script>
+  document.getElementById('chatToggle').addEventListener('click', function() {
+    const chatContainer = document.getElementById('chatContainer');
+    chatContainer.style.display = chatContainer.style.display === 'none' ? 'flex' : 'none';
+  });
+</script>
+
+</body>
+</html>

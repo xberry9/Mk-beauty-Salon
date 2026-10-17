@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services - MK Beauty Salon</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: url('background.jpg') center center fixed no-repeat;
+      background-size: cover;
+      min-height: 100vh;
+      padding: 20px;
+      position: relative;
+    }
+    
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: -1;
+    }
+    
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    
+    h1 {
+      color: #fff;
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+    }
+    
+    h2 {
+      color: #fff;
+      font-size: 1.8em;
+      margin-top: 5px;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.5);
+    }
+    
+    /* Glassy Navigation */
+    nav {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(15px);
+      padding: 15px 30px;
+      border-radius: 50px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+      display: inline-block;
+      margin-top: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      padding: 10px 20px;
+      font-weight: 600;
+      transition: all 0.3s;
+      border-radius: 25px;
+    }
+    
+    nav a:hover {
+      background: rgba(214, 83, 160, 0.3);
+      color: #fff;
+    }
+    
+    nav a.active {
+      background: linear-gradient(135deg, #ff69b4, #da70d6);
+      color: white;
+    }
+    
+    /* Glassy Button */
+    .glass-button {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      color: white;
+      padding: 16px 40px;
+      border-radius: 30px;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+    
+    .glass-button:hover {
+      background: rgba(255, 255, 255, 0.3);
+      border-color: rgba(255, 255, 255, 0.6);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+    }
+    
+    .glass-button-primary {
+      background: linear-gradient(135deg, rgba(255, 105, 180, 0.6), rgba(218, 112, 214, 0.6));
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+    }
+    
+    .glass-button-primary:hover {
+      background: linear-gradient(135deg, #ff69b4, #da70d6);
+    }
+    
+    /* Glass Card */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      padding: 40px;
+    }
+    
+    /* Hamburger Menu - Always Visible */
+    .hamburger {
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(15px);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s;
+    }
+    
+    .hamburger:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+    
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: #fff;
+      margin: 4px 0;
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+    
+    /* X Close Button - Always Visible */
+    .close-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 45px;
+      height: 45px;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(15px);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 24px;
+      color: #fff;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    
+    .close-btn:hover {
+      background: rgba(255, 105, 180, 0.4);
+      border-color: rgba(255, 105, 180, 0.5);
+      transform: scale(1.1);
+    }
+    
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(20px);
+      z-index: 1000;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    
+    .mobile-menu a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 24px;
+      margin: 20px 0;
+      padding: 15px 40px;
+      border-radius: 15px;
+      transition: 0.3s;
+    }
+    
+    .mobile-menu a:hover {
+      background: rgba(255, 105, 180, 0.3);
+    }
+    
+    .mobile-menu a.active {
+      background: linear-gradient(135deg, #ff69b4, #da70d6);
+    }
+    
+    .close-menu {
+      position: absolute;
+      top: 30px;
+      right: 30px;
+      font-size: 40px;
+      color: #fff;
+      cursor: pointer;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .fade-in {
+      animation: fadeIn 0.8s ease-out;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>MK Beauty Salon</h1>
+  <h2>Our Services</h2>
+  <div style="display:flex; gap:10px; align-items:center; margin-left:auto;">
+    <a href="index.html" class="close-btn">&times;</a>
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <span class="close-menu" onclick="window.location.href='index.html'">&times;</span>
+  <a href="index.html">Home</a>
+  <a href="services.html" class="active">Services</a>
+  <a href="Contact Us.html">Contact</a>
+  <a href="About.html">About</a>
+  <a href="reviews.html">Reviews</a>
+  <a href="#" onclick="toggleMenu(); document.getElementById('chatToggle').click();">Get Help</a>
+</div>
+
+<script>
+function toggleMenu() {
+  const menu = document.getElementById('mobileMenu');
+  menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+}
+</script>
+
+<!-- Services - Elegant List with Icons -->
+<div class="glass-card fade-in" style="max-width:700px; margin:20px auto;">
+
+<h3 style="color:#fff; text-align:center; margin-bottom:40px; font-size: 32px;">Our Premium Services</h3>
+
+<div style="display:flex; flex-direction:column; gap:25px;">
+
+<!-- Nails -->
+<div style="background:rgba(255, 255, 255, 0.1); backdrop-filter:blur(10px); padding:25px; border-radius:15px; border:1px solid rgba(255, 255, 255, 0.2); display:flex; align-items:center; gap:20px;">
+<div style="width:60px; height:60px; background:linear-gradient(135deg, #ff69b4, #da70d6); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:24px; color:#fff; font-weight:bold;">N</div>
+<div style="flex:1;">
+<h4 style="color:#fff; font-size:22px; margin-bottom:10px;">Nails</h4>
+<p style="color:rgba(255,255,255,0.8); font-size:15px; line-height:1.6; margin-bottom:10px;">
+<strong>Acrylic:</strong> R130 - R220 | <strong>Gel:</strong> R90 - R180
+</p>
+<p style="color:rgba(255,255,255,0.6); font-size:13px;">Available in Almond, Square, Coffin, and Stiletto shapes</p>
+</div>
+</div>
+
+<!-- Eyelashes -->
+<div style="background:rgba(255, 255, 255, 0.1); backdrop-filter:blur(10px); padding:25px; border-radius:15px; border:1px solid rgba(255, 255, 255, 0.2); display:flex; align-items:center; gap:20px;">
+<div style="width:60px; height:60px; background:linear-gradient(135deg, #667eea, #764ba2); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:24px; color:#fff; font-weight:bold;">E</div>
+<div style="flex:1;">
+<h4 style="color:#fff; font-size:22px; margin-bottom:10px;">Eyelashes</h4>
+<p style="color:rgba(255,255,255,0.8); font-size:15px; line-height:1.6; margin-bottom:10px;">
+<strong>Cluster Lashes:</strong> R150
+</p>
+<p style="color:rgba(255,255,255,0.6); font-size:13px;">Natural and dramatic looks available</p>
+</div>
+</div>
+
+<!-- Hair Installation -->
+<div style="background:rgba(255, 255, 255, 0.1); backdrop-filter:blur(10px); padding:25px; border-radius:15px; border:1px solid rgba(255, 255, 255, 0.2); display:flex; align-items:center; gap:20px;">
+<div style="width:60px; height:60px; background:linear-gradient(135deg, #11998e, #38ef7d); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:24px; color:#fff; font-weight:bold;">H</div>
+<div style="flex:1;">
+<h4 style="color:#fff; font-size:22px; margin-bottom:10px;">Hair Installation</h4>
+<p style="color:rgba(255,255,255,0.8); font-size:15px; line-height:1.6; margin-bottom:10px;">
+<strong>Basic:</strong> R180 | <strong>Styled:</strong> R230
+</p>
+<p style="color:rgba(255,255,255,0.6); font-size:13px;">Professional installation services</p>
+</div>
+</div>
+
+<!-- Makeup -->
+<div style="background:rgba(255, 255, 255, 0.1); backdrop-filter:blur(10px); padding:25px; border-radius:15px; border:1px solid rgba(255, 255, 255, 0.2); display:flex; align-items:center; gap:20px;">
+<div style="width:60px; height:60px; background:linear-gradient(135deg, #f093fb, #f5576c); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:24px; color:#fff; font-weight:bold;">M</div>
+<div style="flex:1;">
+<h4 style="color:#fff; font-size:22px; margin-bottom:10px;">Makeup</h4>
+<p style="color:rgba(255,255,255,0.8); font-size:15px; line-height:1.6; margin-bottom:10px;">
+<strong>Natural:</strong> R170 | <strong>Full Glam:</strong> R220
+</p>
+<p style="color:rgba(255,255,255,0.6); font-size:13px;">Perfect for any occasion</p>
+</div>
+</div>
+
+</div>
+
+</div>
+
+<!-- Gallery Button -->
+<button type="button" id="galleryButton" class="glass-button glass-button-primary" style="margin:30px auto; display:block;">
+    View Our Gallery
+</button>
+
+<!-- Gallery -->
+<div id="Gallery" style="display:none; max-width:900px; margin:25px auto; background:rgba(255, 255, 255, 0.15); backdrop-filter: blur(20px); padding:30px; border-radius:20px; box-shadow:0 8px 32px rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.3); text-align:center;">
+<div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap:15px;">
+<img src="image1.jpg" style="width:100%; height:200px; object-fit:cover; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.2); transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" alt="Gallery image 1">
+<img src="image2.jpg" style="width:100%; height:200px; object-fit:cover; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.2); transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" alt="Gallery image 2">
+<img src="image3.jpg" style="width:100%; height:200px; object-fit:cover; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.2); transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" alt="Gallery image 3">
+<img src="image4.jpg" style="width:100%; height:200px; object-fit:cover; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.2); transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" alt="Gallery image 4">
+<img src="image5.jpg" style="width:100%; height:200px; object-fit:cover; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.2); transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" alt="Gallery image 5">
+<img src="image6.jpg" style="width:100%; height:200px; object-fit:cover; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.2); transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" alt="Gallery image 6">
+<img src="image7.jpg" style="width:100%; height:200px; object-fit:cover; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.2); transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" alt="Gallery image 7">
+<img src="image8.jpg" style="width:100%; height:200px; object-fit:cover; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.2); transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" alt="Gallery image 8">
+<img src="image9.jpg" style="width:100%; height:200px; object-fit:cover; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.2); transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" alt="Gallery image 9">
+<img src="image10.jpg" style="width:100%; height:200px; object-fit:cover; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.2); transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" alt="Gallery image 10">
+<img src="image11.jpg" style="width:100%; height:200px; object-fit:cover; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.2); transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" alt="Gallery image 11">
+<img src="image12.jpg" style="width:100%; height:200px; object-fit:cover; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.2); transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" alt="Gallery image 12">
+<img src="image13.jpg" style="width:100%; height:200px; object-fit:cover; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.2); transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" alt="Gallery image 13">
+<img src="image14.jpg" style="width:100%; height:200px; object-fit:cover; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.2); transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" alt="Gallery image 14">
+<img src="image15.jpg" style="width:100%; height:200px; object-fit:cover; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.2); transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" alt="Gallery image 15">
+<img src="image16.jpg" style="width:100%; height:200px; object-fit:cover; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.2); transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" alt="Gallery image 16">
+<img src="image17.jpg" style="width:100%; height:200px; object-fit:cover; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.2); transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" alt="Gallery image 17">
+<img src="image18.jpg" style="width:100%; height:200px; object-fit:cover; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.2); transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" alt="Gallery image 18">
+<img src="image19.jpg" style="width:100%; height:200px; object-fit:cover; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.2); transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" alt="Gallery image 19">
+<img src="image20.jpg" style="width:100%; height:200px; object-fit:cover; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.2); transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" alt="Gallery image 20">
+</div>
+</div>
+
+<script>
+  document.getElementById('galleryButton').addEventListener('click', function() {
+    var galleryDiv = document.getElementById('Gallery');
+    galleryDiv.style.display = galleryDiv.style.display === 'none' ? 'block' : 'none';
+  });
+  
+  // Check if URL has openGallery parameter
+  window.onload = function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('openGallery') === 'true') {
+      var galleryDiv = document.getElementById('Gallery');
+      if (galleryDiv) {
+        galleryDiv.style.display = 'block';
+        galleryDiv.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+</script>
+
+<!-- Chatbot Widget -->
+<div id="chatbotWidget"></div>
+<script>
+  document.getElementById('chatbotWidget').innerHTML = `
+    <link rel="stylesheet" href="chatbot-styles.css">
+    <div class="chat-widget-container">
+      <button class="chat-toggle-button" id="chatToggle" title="Chat with Xberry">💬</button>
+      <span class="get-help-text" onclick="document.getElementById('chatToggle').click()">Get Help</span>
+      <div class="chat-container" id="chatContainer">
+        <div class="chat-header">
+          <h1>Xberry</h1>
+          <p>Your MK Beauty Salon Assistant</p>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+          <div class="message bot-message">
+            <p>Hi! I'm Xberry, your MK Beauty Salon assistant. Ask me about our services, prices, or opening hours!</p>
+          </div>
+        </div>
+        <div class="chat-input-container">
+          <input type="text" id="userInput" placeholder="Ask me anything..." class="chat-input">
+          <button id="sendButton" class="send-button">Send</button>
+        </div>
+      </div>
+    </div>
+  `;
+</script>
+<script src="chatbot-script.js"></script>
+<script>
+  document.getElementById('chatToggle').addEventListener('click', function() {
+    const chatContainer = document.getElementById('chatContainer');
+    chatContainer.style.display = chatContainer.style.display === 'none' ? 'flex' : 'none';
+  });
+</script>
+
+</body>
+</html>

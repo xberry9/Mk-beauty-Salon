@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About - MK Beauty Salon</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: url('background.jpg') center center fixed no-repeat;
+      background-size: cover;
+      min-height: 100vh;
+      padding: 20px;
+      position: relative;
+    }
+    
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: -1;
+    }
+    
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    
+    h1 {
+      color: #fff;
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+    }
+    
+    h2 {
+      color: #fff;
+      font-size: 1.8em;
+      margin-top: 5px;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.5);
+    }
+    
+    /* Glassy Navigation */
+    nav {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(15px);
+      padding: 15px 30px;
+      border-radius: 50px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+      display: inline-block;
+      margin-top: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      padding: 10px 20px;
+      font-weight: 600;
+      transition: all 0.3s;
+      border-radius: 25px;
+    }
+    
+    nav a:hover {
+      background: rgba(214, 83, 160, 0.3);
+      color: #fff;
+    }
+    
+    nav a.active {
+      background: linear-gradient(135deg, #ff69b4, #da70d6);
+      color: white;
+    }
+    
+    /* Glassy Button */
+    .glass-button {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      color: white;
+      padding: 16px 40px;
+      border-radius: 30px;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+    
+    .glass-button:hover {
+      background: rgba(255, 255, 255, 0.3);
+      border-color: rgba(255, 255, 255, 0.6);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+    }
+    
+    .glass-button-primary {
+      background: linear-gradient(135deg, rgba(255, 105, 180, 0.6), rgba(218, 112, 214, 0.6));
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+    }
+    
+    .glass-button-primary:hover {
+      background: linear-gradient(135deg, #ff69b4, #da70d6);
+    }
+    
+    /* Glass Card */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      padding: 40px;
+    }
+    
+    /* Hamburger Menu - Always Visible */
+    .hamburger {
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(15px);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s;
+    }
+    
+    .hamburger:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+    
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: #fff;
+      margin: 4px 0;
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+    
+    /* X Close Button - Always Visible */
+    .close-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 45px;
+      height: 45px;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(15px);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 24px;
+      color: #fff;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    
+    .close-btn:hover {
+      background: rgba(255, 105, 180, 0.4);
+      border-color: rgba(255, 105, 180, 0.5);
+      transform: scale(1.1);
+    }
+    
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(20px);
+      z-index: 1000;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    
+    .mobile-menu a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 24px;
+      margin: 20px 0;
+      padding: 15px 40px;
+      border-radius: 15px;
+      transition: 0.3s;
+    }
+    
+    .mobile-menu a:hover {
+      background: rgba(255, 105, 180, 0.3);
+    }
+    
+    .mobile-menu a.active {
+      background: linear-gradient(135deg, #ff69b4, #da70d6);
+    }
+    
+    .close-menu {
+      position: absolute;
+      top: 30px;
+      right: 30px;
+      font-size: 40px;
+      color: #fff;
+      cursor: pointer;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .fade-in {
+      animation: fadeIn 0.8s ease-out;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>MK Beauty Salon</h1>
+  <h2>About Us</h2>
+  <div style="display:flex; gap:10px; align-items:center; margin-left:auto;">
+    <a href="index.html" class="close-btn">&times;</a>
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <span class="close-menu" onclick="window.location.href='index.html'">&times;</span>
+  <a href="index.html">Home</a>
+  <a href="services.html">Services</a>
+  <a href="Contact Us.html">Contact</a>
+  <a href="About.html" class="active">About</a>
+  <a href="reviews.html">Reviews</a>
+  <a href="#" onclick="toggleMenu(); document.getElementById('chatToggle').click();">Get Help</a>
+</div>
+
+<script>
+function toggleMenu() {
+  const menu = document.getElementById('mobileMenu');
+  menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+}
+</script>
+
+<!-- About Section -->
+<div class="glass-card fade-in" style="max-width:900px; margin:20px auto; display:flex; flex-wrap:wrap; gap:40px; align-items:center;">
+
+<!-- Left - Photo -->
+<div style="flex:1; min-width:280px; text-align:center;">
+  <img src="mk.jpeg" alt="Mikhenso - Founder" style="width:100%; max-width:320px; border-radius:20px; border:4px solid rgba(255, 255, 255, 0.3); box-shadow:0 8px 25px rgba(0, 0, 0, 0.3);">
+  <p style="color:#fff; font-weight:bold; margin-top:15px; font-size:18px;">Mikhenso Mkhonto</p>
+  <p style="color:rgba(255,255,255,0.7); font-size:14px; margin-top:5px;">Founder & Owner</p>
+</div>
+
+<!-- Right - Content -->
+<div style="flex:1.2; min-width:300px;">
+
+  <p style="color:#fff; font-size:22px; font-weight:bold; text-align:left; margin-bottom:20px; line-height:1.4;">
+  Hello, my name is Mikhenso Mkhonto, founder of MK Beauty Salon
+  </p>
+
+  <p style="line-height:1.9; font-size:16px; color:rgba(255,255,255,0.9); margin-bottom:15px;">
+  At MK we believe every woman deserves to shine in her own way.
+  </p>
+
+  <p style="line-height:1.9; font-size:16px; color:rgba(255,255,255,0.9); margin-bottom:15px;">
+  I started this salon because I love making women feel beautiful, powerful, polished and unapologetically themselves.
+  </p>
+
+  <p style="line-height:1.9; font-size:16px; color:rgba(255,255,255,0.9); margin-bottom:15px;">
+  We specialise in nails, lashes, installations and makeup. Whether you want a simple natural look or full glam, we got you.
+  </p>
+
+  <p style="line-height:1.9; font-size:16px; color:rgba(255,255,255,0.9); margin-bottom:25px;">
+  Thank you for supporting my small business. I can't wait to glam you up!
+  </p>
+
+  <p style="font-weight:bold; color:#fff; margin-top:20px; font-size:18px;">- MK</p>
+
+  <a href="Contact Us.html" class="glass-button glass-button-primary" style="display:inline-block; margin-top:25px; text-decoration:none;">
+    Book With Me
+  </a>
+
+</div>
+
+</div>
+
+<!-- Chatbot Widget -->
+<div id="chatbotWidget"></div>
+<script>
+  document.getElementById('chatbotWidget').innerHTML = `
+    <link rel="stylesheet" href="chatbot-styles.css">
+    <div class="chat-widget-container">
+      <button class="chat-toggle-button" id="chatToggle" title="Chat with Xberry">💬</button>
+      <span class="get-help-text" onclick="document.getElementById('chatToggle').click()">Get Help</span>
+      <div class="chat-container" id="chatContainer">
+        <div class="chat-header">
+          <h1>Xberry</h1>
+          <p>Your MK Beauty Salon Assistant</p>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+          <div class="message bot-message">
+            <p>Hi! I'm Xberry, your MK Beauty Salon assistant. Ask me about our services, prices, or opening hours!</p>
+          </div>
+        </div>
+        <div class="chat-input-container">
+          <input type="text" id="userInput" placeholder="Ask me anything..." class="chat-input">
+          <button id="sendButton" class="send-button">Send</button>
+        </div>
+      </div>
+    </div>
+  `;
+</script>
+<script src="chatbot-script.js"></script>
+<script>
+  document.getElementById('chatToggle').addEventListener('click', function() {
+    const chatContainer = document.getElementById('chatContainer');
+    chatContainer.style.display = chatContainer.style.display === 'none' ? 'flex' : 'none';
+  });
+</script>
+
+</body>
+</html>

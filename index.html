@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MK Beauty Salon - Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: url('background.jpg') center center fixed no-repeat;
+            background-size: cover;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: -1;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            color: #fff;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+        }
+        
+        /* Glassy Navigation */
+        nav {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(15px);
+            padding: 15px 30px;
+            border-radius: 50px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            display: inline-block;
+            margin-top: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border-radius: 25px;
+        }
+        
+        nav a:hover {
+            background: rgba(214, 83, 160, 0.3);
+            color: #fff;
+        }
+        
+        nav a.active {
+            background: linear-gradient(135deg, #ff69b4, #da70d6);
+            color: white;
+        }
+        
+        /* Glassy Button Effect */
+        .glass-button {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: white;
+            padding: 16px 40px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        
+        .glass-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.6);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        .glass-button-primary {
+            background: linear-gradient(135deg, rgba(255, 105, 180, 0.6), rgba(218, 112, 214, 0.6));
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+        
+        .glass-button-primary:hover {
+            background: linear-gradient(135deg, #ff69b4, #da70d6);
+        }
+        
+        /* Glass Card */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+        }
+        
+        /* Hamburger Menu - Always Visible */
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(15px);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+        }
+        
+        .hamburger:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #fff;
+            margin: 4px 0;
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+        
+        /* X Close Button - Always Visible */
+        .close-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(15px);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 24px;
+            color: #fff;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        
+        .close-btn:hover {
+            background: rgba(255, 105, 180, 0.4);
+            border-color: rgba(255, 105, 180, 0.5);
+            transform: scale(1.1);
+        }
+        
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .mobile-menu a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 24px;
+            margin: 20px 0;
+            padding: 15px 40px;
+            border-radius: 15px;
+            transition: 0.3s;
+        }
+        
+        .mobile-menu a:hover {
+            background: rgba(255, 105, 180, 0.3);
+        }
+        
+        .mobile-menu a.active {
+            background: linear-gradient(135deg, #ff69b4, #da70d6);
+        }
+        
+        .close-menu {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            font-size: 40px;
+            color: #fff;
+            cursor: pointer;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        /* Form Styles - No White Background */
+        input, select, textarea {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #fff;
+            padding: 14px;
+            border-radius: 12px;
+            font-size: 15px;
+            width: 100%;
+            box-sizing: border-box;
+            transition: all 0.3s;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #ff69b4;
+            background: rgba(255, 255, 255, 0.25);
+        }
+        
+        input::placeholder, textarea::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        select option {
+            background: #333;
+            color: #fff;
+        }
+        
+        label {
+            color: #fff;
+            font-weight: 600;
+            font-size: 14px;
+            display: block;
+            margin-bottom: 8px;
+        }
+        
+        .warning-text {
+            color: #ff6b6b;
+            font-weight: 600;
+            font-size: 14px;
+            background: rgba(255, 107, 107, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 107, 107, 0.4);
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>MK Beauty Salon</h1>
+    <div style="display:flex; gap:10px; align-items:center; margin-left:auto;">
+        <div class="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</header>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+    <span class="close-menu" onclick="window.location.href='index.html'">&times;</span>
+    <a href="index.html" class="active">Home</a>
+    <a href="services.html">Services</a>
+    <a href="Contact Us.html">Contact</a>
+    <a href="About.html">About</a>
+    <a href="reviews.html">Reviews</a>
+    <a href="#" onclick="toggleMenu(); document.getElementById('chatToggle').click();">Get Help</a>
+</div>
+
+<script>
+function toggleMenu() {
+    const menu = document.getElementById('mobileMenu');
+    menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+}
+</script>
+
+<!-- Welcome Section -->
+<div class="glass-card fade-in" style="max-width:600px; margin: 20px auto; text-align:center;">
+
+<h3 style="color:#fff; margin-top:0; font-size: 28px; margin-bottom: 20px;">Welcome to MK Beauty Salon</h3>
+
+<p style="color:#fff; line-height:1.8; font-size:16px;">
+Thank you for choosing MK Beauty Salon. We are here to make you feel beautiful, powerful and confident.
+<br><br>
+We are available for bookings Monday to Friday, 9:00 AM to 6:00 PM, and Saturday 10:00 AM to 3:00 PM. Please book in advance to secure your slot with R50 booking fee.
+<br><br>
+We can't wait to glam you up!
+</p>
+
+<button id="bookBtn" onclick="document.getElementById('bookingSection').style.display='block'; document.getElementById('bookBtn').style.display='none';" class="glass-button glass-button-primary">
+    Book Now
+</button>
+
+</div>
+
+<!-- Booking Section -->
+<div id="bookingSection" style="display:none; max-width:600px; margin: 20px auto;">
+
+<div class="glass-card fade-in">
+
+<h3 style="color:#fff; text-align:center; margin-top:0; font-size: 26px; margin-bottom: 25px;">Booking Form</h3>
+
+<form id="bookingForm">
+
+<label>Your Name:</label>
+<input type="text" id="name" required placeholder="Enter your name">
+
+<label>Service:</label>
+<select id="service" required>
+  <option value="">-- Choose Service --</option>
+  <option>Acrylic Small R130</option>
+  <option>Acrylic Medium R170</option>
+  <option>Acrylic Long R220</option>
+  <option>Gel Small R90</option>
+  <option>Gel Medium R140</option>
+  <option>Gel Large R180</option>
+  <option>Eyelashes R150</option>
+  <option>Installation Basic R180</option>
+  <option>Installation Styled R230</option>
+  <option>Makeup Natural R170</option>
+  <option>Makeup Full Glam R220</option>
+</select>
+
+<label>Date:</label>
+<input type="date" id="date" required>
+
+<label>Time:</label>
+<input type="time" id="time" required>
+
+<button type="submit" class="glass-button glass-button-primary" style="width:100%; margin-top:20px;">
+    Send to WhatsApp
+</button>
+
+</form>
+
+<div class="warning-text" style="margin-top:20px; color:#fff; background:rgba(255, 255, 255, 0.2); border-color:rgba(255, 255, 255, 0.4);">
+    IMPORTANT: R50 booking fee required to secure your slot. This fee is NON-REFUNDABLE.
+</div>
+
+</div>
+
+</div>
+
+<!-- Reviews Section - Outside Card -->
+<div style="max-width:600px; margin: 40px auto; text-align:center;">
+
+<h3 style="color:#fff; font-size: 28px; margin-bottom: 10px;">Customer Reviews</h3>
+<p style="text-align:center; color:rgba(255,255,255,0.8); margin-bottom:30px; font-size:15px;">See what our clients say about us</p>
+
+<!-- Rating Summary -->
+<div style="background: linear-gradient(135deg, rgba(255, 105, 180, 0.3), rgba(218, 112, 214, 0.3)); backdrop-filter: blur(15px); padding:30px; border-radius:15px; margin-bottom:30px; border: 1px solid rgba(255, 255, 255, 0.3); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);">
+<div style="font-size:56px; font-weight:bold; color:#fff; line-height:1;">4.9</div>
+<div style="color:#ffd700; font-size:24px; margin-top:10px;">★★★★★</div>
+<div style="color:rgba(255,255,255,0.8); font-size:14px; margin-top:10px;">Based on 127 reviews</div>
+</div>
+
+<a href="reviews.html" class="glass-button glass-button-primary" style="display:inline-block; text-decoration:none;">
+    View All Reviews
+</a>
+
+</div>
+
+<script>
+document.getElementById('bookingForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  
+  var name = document.getElementById('name').value;
+  var service = document.getElementById('service').value;
+  var date = document.getElementById('date').value;
+  var time = document.getElementById('time').value;
+  var msg = "Hello MK Beauty Salon!%0A%0AMy name is: " + name + "%0AService: " + service + "%0ADate: " + date + "%0ATime: " + time + "%0A%0APlease send banking details for R50 booking fee.";
+  alert ("Thank you " + name + " for booking with MK Beauty Salon! We will contact you shortly to confirm your appointment.");
+  window.open("https://wa.me/27661007863?text=" + msg, '_blank');
+  
+});
+</script>
+
+<!-- Chatbot Widget -->
+<div id="chatbotWidget"></div>
+<script>
+  document.getElementById('chatbotWidget').innerHTML = `
+    <link rel="stylesheet" href="chatbot-styles.css">
+    <div class="chat-widget-container">
+      <button class="chat-toggle-button" id="chatToggle" title="Chat with Xberry">💬</button>
+      <span class="get-help-text" onclick="document.getElementById('chatToggle').click()">Get Help</span>
+      <div class="chat-container" id="chatContainer">
+        <div class="chat-header">
+          <h1>Xberry</h1>
+          <p>Your MK Beauty Salon Assistant</p>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+          <div class="message bot-message">
+            <p>Hi! I'm Xberry, your MK Beauty Salon assistant. Ask me about our services, prices, or opening hours!</p>
+          </div>
+        </div>
+        <div class="chat-input-container">
+          <input type="text" id="userInput" placeholder="Ask me anything..." class="chat-input">
+          <button id="sendButton" class="send-button">Send</button>
+        </div>
+      </div>
+    </div>
+  `;
+</script>
+<script src="chatbot-script.js"></script>
+<script>
+  document.getElementById('chatToggle').addEventListener('click', function() {
+    const chatContainer = document.getElementById('chatContainer');
+    chatContainer.style.display = chatContainer.style.display === 'none' ? 'flex' : 'none';
+  });
+</script>
+
+</body>
+</html>
